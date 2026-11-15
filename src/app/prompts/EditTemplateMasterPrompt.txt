@@ -1,0 +1,68 @@
+Act as a senior React + Remotion motion designer. Write ONE custom "edit template" for a beat-synced image edit video (vertical 1080x1920, 30 fps). The app (Automake Studio) gives the template a list of images, a cut timeline, the music BPM and a brand. The template only decides how every cut LOOKS.
+
+THE EDIT I WANT (style, mood, colors, effects): [DESCRIBE THE EDIT STYLE HERE]
+TEMPLATE NAME (the exported component must use exactly this name): [YOUR_TEMPLATE_NAME]
+
+=====================================================================
+CONTRACT (follow exactly, the app breaks otherwise)
+=====================================================================
+1. Output ONLY the complete .tsx file. No explanation, no markdown fences.
+2. Imports (use only what you need):
+   import React from "react";
+   import { AbsoluteFill, Img, interpolate, random, spring, useCurrentFrame, useVideoConfig } from "remotion";
+   import { CLAMP, SAFE, ProgressBar } from "../shared";
+   import { EditProps, EditSceneProps, EditVideo, beatPulseAt } from "../editShared";
+3. Write a Scene component: const Scene: React.FC<EditSceneProps> = ({ src, seg, index, total, totalFrames, bpm, beatFrames, brand }) => { ... }
+   - src: the image URL for this cut. ALWAYS draw it with Remotion's <Img src={src} style={{ width: "100%", height: "100%", objectFit: "cover" }} />. NEVER use a plain <img> or CSS background-image for it.
+   - seg: { imageIndex, start, duration } in frames. This cut starts at global frame seg.start and lasts seg.duration frames.
+   - index: cut number starting at 0. total: number of cuts. totalFrames: length of the whole video.
+   - bpm: base music tempo (do not use it for beat sync). beatFrames: array with the frame number of EVERY beat in the whole video. The music tempo can change during the video, so ALWAYS use beatFrames for beat sync. brand: { name, color } (color is a #RRGGBB hex string, use it as the accent color).
+   - useCurrentFrame() inside Scene is LOCAL to the cut (0 at the cut start). The global video frame is g = seg.start + frame.
+   - beatPulseAt(g, beatFrames, power?) returns 1 exactly on every beat and decays to 0 before the next beat. Use it for beat-synced zooms, flashes, glows, shakes. It follows tempo changes automatically.
+4. Export the template exactly like this (YOUR_TEMPLATE_NAME = the name above):
+   export const YOUR_TEMPLATE_NAME: React.FC<EditProps> = (props) => (
+     <EditVideo {...props} bg="#000" overlap={0} Scene={Scene} />
+   );
+   - overlap (frames) makes every cut stay on screen that many frames longer, so the NEXT cut can fade in on top of it for crossfades. If you set overlap above 0, the Scene must fade its own opacity in over those frames for index > 0, and use span = seg.duration + overlap for slow zooms.
+5. Layout: canvas is 1080x1920. YouTube Shorts covers the bottom ~450px and the right ~220px with its own UI, so keep any text or important graphics inside SAFE (SAFE.left, SAFE.right, SAFE.top, SAFE.bottom) and the image subject is in the middle.
+6. Text: the only text allowed is the brand watermark (brand.name). Optional small HUD text like a timecode or "CUT 03/12" is fine. No other copy.
+7. Fonts: load with @remotion/google-fonts, for example:
+   import { loadFont } from "@remotion/google-fonts/Anton";
+   const { fontFamily } = loadFont("normal", { weights: ["400"], subsets: ["latin"] });
+   Only use fonts that exist in Google Fonts.
+8. Emojis: write them only as unicode escapes like "\u{1F525}". Never type a raw emoji character.
+9. Determinism (very important, the video is rendered frame by frame):
+   - Never use Math.random(). Use random("some-seed-" + frame) from remotion.
+   - Never use CSS animations, CSS transitions or setTimeout. Animate ONLY from useCurrentFrame() with interpolate(), spring() and Math.sin().
+10. Performance: rendering must stay fast. Do NOT use backdrop-filter, avoid big blur() values and heavy box-shadows, and keep animated elements under about 40. Prefer transforms, opacity, gradients and mix-blend-mode.
+11. Plain, valid TypeScript. No external packages other than remotion and @remotion/google-fonts. Do not import anything else from the project.
+
+=====================================================================
+MINIMAL WORKING EXAMPLE (follow this structure, make yours far better)
+=====================================================================
+import React from "react";
+import { AbsoluteFill, Img, interpolate, useCurrentFrame } from "remotion";
+import { CLAMP, ProgressBar } from "../shared";
+import { EditProps, EditSceneProps, EditVideo, beatPulseAt } from "../editShared";
+
+const Scene: React.FC<EditSceneProps> = ({ src, seg, index, totalFrames, beatFrames, brand }) => {
+  const frame = useCurrentFrame();
+  const g = seg.start + frame;
+  const pulse = beatPulseAt(g, beatFrames);
+  const zoom = interpolate(frame, [0, seg.duration], [1.05, 1.15], CLAMP) + pulse * 0.03;
+  const flash = interpolate(frame, [0, 6], [index === 0 ? 0 : 0.7, 0], CLAMP);
+  return (
+    <AbsoluteFill style={{ backgroundColor: "#000", overflow: "hidden" }}>
+      <Img src={src} style={{ width: "100%", height: "100%", objectFit: "cover", transform: `scale(${zoom})` }} />
+      <AbsoluteFill style={{ backgroundColor: "#fff", opacity: flash }} />
+      <ProgressBar progress={(g / totalFrames) * 100} accent={brand.color} height={5} />
+    </AbsoluteFill>
+  );
+};
+
+export const MyEdit: React.FC<EditProps> = (props) => (
+  <EditVideo {...props} bg="#000" overlap={0} Scene={Scene} />
+);
+
+=====================================================================
+Now write the complete .tsx for my edit style above. Make it feel like a professional creator edit: strong cut transitions, beat-synced motion, color grading, a few well-chosen effects, and a clean brand watermark.

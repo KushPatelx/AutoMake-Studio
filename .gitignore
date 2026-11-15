@@ -1,0 +1,27 @@
+﻿# Node modules
+node_modules/
+dist/
+build/
+.npm
+
+# Remotion & Output folders (Yeh important hai)
+out/
+.remotion/
+
+# Log files
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# OS Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# User Generated Media
+projects/
+renders/

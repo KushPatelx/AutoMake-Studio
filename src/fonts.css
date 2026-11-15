@@ -1,0 +1,28 @@
+﻿/* Geography: Subway Surfers Vibe */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+/* Psychology: Deep & Sleek */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;0,800;0,900;1,400&display=swap');
+
+/* Technology: Google Sans (Direct from Google servers) */
+@font-face {
+  font-family: 'Google Sans';
+  src: url('https://fonts.gstatic.com/s/googlesans/v14/4UaGrENHsxJlGDuGo1OIlL3Owp4.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Google Sans';
+  src: url('https://fonts.gstatic.com/s/googlesans/v14/4UabrENHsxJlGDuGo1OIlLU94YtzCw.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Google Sans';
+  src: url('https://fonts.gstatic.com/s/googlesans/v14/4Ua-rENHsxJlGDuGo1OIlL3Kwp5mKzs.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* Science: Microscopic Lab Vibe */
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,400&display=swap');
