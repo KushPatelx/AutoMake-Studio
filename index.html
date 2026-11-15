@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Automake Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --bg: #07070b;
+        --lime: #39ff14;
+        --cyan: #22d3ee;
+        --violet: #8b5cf6;
+        --pink: #ec4899;
+      }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background-color: var(--bg);
+        color: #fff;
+        font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .font-display { font-family: 'Space Grotesk', 'Inter', sans-serif; }
+      ::-webkit-scrollbar { width: 8px; height: 8px; }
+      ::-webkit-scrollbar-track { background: #0d0d12; }
+      ::-webkit-scrollbar-thumb { background: #3a3a48; border-radius: 4px; }
+
+      /* ---- shared look ---- */
+      .bg-aurora {
+        background:
+          radial-gradient(900px 500px at 12% -10%, rgba(57,255,20,0.10), transparent 60%),
+          radial-gradient(900px 560px at 92% 0%, rgba(139,92,246,0.16), transparent 60%),
+          radial-gradient(700px 500px at 50% 110%, rgba(34,211,238,0.10), transparent 60%),
+          var(--bg);
+      }
+      .glass {
+        background: rgba(255,255,255,0.035);
+        border: 1px solid rgba(255,255,255,0.09);
+        backdrop-filter: blur(14px);
+      }
+      .grad-text-fact {
+        background: linear-gradient(90deg, #39ff14, #22d3ee);
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+      }
+      .grad-text-edit {
+        background: linear-gradient(90deg, #a78bfa, #ec4899);
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+      }
+      .grad-text-hero {
+        background: linear-gradient(90deg, #39ff14 0%, #22d3ee 45%, #a78bfa 100%);
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+      }
+
+      /* ---- animated phone mockups on mode cards ---- */
+      @keyframes slideInL { 0%,12% { transform: translateX(-70px); opacity: 0; } 30%,86% { transform: translateX(0); opacity: 1; } 100% { transform: translateX(0); opacity: 0; } }
+      @keyframes slideInR { 0%,22% { transform: translateX(70px); opacity: 0; } 40%,86% { transform: translateX(0); opacity: 1; } 100% { transform: translateX(0); opacity: 0; } }
+      @keyframes fadeUp { 0%,38% { transform: translateY(14px); opacity: 0; } 55%,86% { transform: translateY(0); opacity: 1; } 100% { opacity: 0; } }
+      @keyframes progressGrow { 0% { width: 0%; } 100% { width: 100%; } }
+      @keyframes imgFlash {
+        0%   { background: linear-gradient(160deg,#7c3aed,#ec4899); }
+        24%  { background: linear-gradient(160deg,#7c3aed,#ec4899); }
+        25%  { background: linear-gradient(160deg,#0ea5e9,#22d3ee); }
+        49%  { background: linear-gradient(160deg,#0ea5e9,#22d3ee); }
+        50%  { background: linear-gradient(160deg,#f59e0b,#ef4444); }
+        74%  { background: linear-gradient(160deg,#f59e0b,#ef4444); }
+        75%  { background: linear-gradient(160deg,#10b981,#84cc16); }
+        100% { background: linear-gradient(160deg,#10b981,#84cc16); }
+      }
+      @keyframes beatFlash { 0%,100% { opacity: 0; } 4% { opacity: 0.85; } 22% { opacity: 0; } }
+      @keyframes eqBar { 0%,100% { transform: scaleY(0.25); } 50% { transform: scaleY(1); } }
+      @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+      .anim-slide-l { animation: slideInL 4s ease-in-out infinite; }
+      .anim-slide-r { animation: slideInR 4s ease-in-out infinite; }
+      .anim-fade-up { animation: fadeUp 4s ease-in-out infinite; }
+      .anim-progress { animation: progressGrow 4s linear infinite; }
+      .anim-img { animation: imgFlash 4s steps(1, end) infinite; }
+      .anim-beat { animation: beatFlash 1s ease-out infinite; }
+      .anim-eq { animation: eqBar 0.8s ease-in-out infinite; transform-origin: bottom; }
+      .anim-floaty { animation: floaty 5s ease-in-out infinite; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/app/main.tsx"></script>
+  </body>
+</html>
