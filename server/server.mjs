@@ -767,6 +767,36 @@ app.get("/api/progress", (req, res) => {
   req.on("close", () => clearInterval(interval));
 });
 
+// Browser tab band hone pe server khud band (sirf launcher se: AUTOMAKE_AUTOEXIT=1)
+if (process.env.AUTOMAKE_AUTOEXIT) {
+  let clients = 0;
+  let killTimer = null;
+  const GRACE_MS = 15000;
+
+  app.get("/api/alive", (req, res) => {
+    res.setHeader("Content-Type", "text/event-stream");
+    res.setHeader("Cache-Control", "no-cache");
+    res.setHeader("Connection", "keep-alive");
+    res.flushHeaders?.();
+    res.write("data: hi\n\n");
+
+    clients++;
+    clearTimeout(killTimer);
+
+    req.on("close", () => {
+      clients--;
+      if (clients > 0) return;
+      const check = () => {
+        if (clients > 0) return;
+        if (busy) { killTimer = setTimeout(check, 5000); return; } // render chal raha ho to ruko
+        console.log("Browser band hua, server band ho raha hai");
+        process.exit(0);
+      };
+      killTimer = setTimeout(check, GRACE_MS);
+    });
+  });
+}
+
 app.listen(4000, () =>
   console.log(`Backend Engine LIVE on Port 4000 (render concurrency: ${CONCURRENCY} of ${CORES} cores)`),
 );
