@@ -4,18 +4,20 @@ import * as M0 from "./BellinghamGalacticoAura";
 import * as M1 from "./DarkKnightVengeance";
 import * as M2 from "./DavidBeckhamGoldenBend";
 import * as M3 from "./DoctorStrangeSanctumAura";
-import * as M4 from "./GhostRiderHellfire";
-import * as M5 from "./GodzillaAtomicTitan";
-import * as M6 from "./HaalandCyborgViking";
-import * as M7 from "./IronManMark85HUD";
-import * as M8 from "./KaneEliteImpact";
-import * as M9 from "./KratosSpartanVengeance";
-import * as M10 from "./MbappeSupersonicAura";
-import * as M11 from "./SaitamaSeriousPunch";
-import * as M12 from "./ThomasShelbyPeakyAura";
-import * as M13 from "./WolverineClawSlash";
-import * as M14 from "./ZlatanLionRage";
-import * as M15 from "./ZoroKingOfHell";
+import * as M4 from "./DoomLatverianIron";
+import * as M5 from "./GhostRiderHellfire";
+import * as M6 from "./GodzillaAtomicTitan";
+import * as M7 from "./GokuSaiyanAscend";
+import * as M8 from "./HaalandCyborgViking";
+import * as M9 from "./IronManMark85HUD";
+import * as M10 from "./KaneEliteImpact";
+import * as M11 from "./KratosSpartanVengeance";
+import * as M12 from "./MbappeSupersonicAura";
+import * as M13 from "./SaitamaSeriousPunch";
+import * as M14 from "./ThomasShelbyPeakyAura";
+import * as M15 from "./WolverineClawSlash";
+import * as M16 from "./ZlatanLionRage";
+import * as M17 from "./ZoroKingOfHell";
 
 const pick = (mod: any, name: string): ComponentType<any> =>
   mod[name] ??
@@ -30,16 +32,18 @@ export const customTemplates: {
   { name: "DarkKnightVengeance", component: pick(M1, "DarkKnightVengeance") },
   { name: "DavidBeckhamGoldenBend", component: pick(M2, "DavidBeckhamGoldenBend") },
   { name: "DoctorStrangeSanctumAura", component: pick(M3, "DoctorStrangeSanctumAura") },
-  { name: "GhostRiderHellfire", component: pick(M4, "GhostRiderHellfire") },
-  { name: "GodzillaAtomicTitan", component: pick(M5, "GodzillaAtomicTitan") },
-  { name: "HaalandCyborgViking", component: pick(M6, "HaalandCyborgViking") },
-  { name: "IronManMark85HUD", component: pick(M7, "IronManMark85HUD") },
-  { name: "KaneEliteImpact", component: pick(M8, "KaneEliteImpact") },
-  { name: "KratosSpartanVengeance", component: pick(M9, "KratosSpartanVengeance") },
-  { name: "MbappeSupersonicAura", component: pick(M10, "MbappeSupersonicAura") },
-  { name: "SaitamaSeriousPunch", component: pick(M11, "SaitamaSeriousPunch") },
-  { name: "ThomasShelbyPeakyAura", component: pick(M12, "ThomasShelbyPeakyAura") },
-  { name: "WolverineClawSlash", component: pick(M13, "WolverineClawSlash") },
-  { name: "ZlatanLionRage", component: pick(M14, "ZlatanLionRage") },
-  { name: "ZoroKingOfHell", component: pick(M15, "ZoroKingOfHell") },
+  { name: "DoomLatverianIron", component: pick(M4, "DoomLatverianIron") },
+  { name: "GhostRiderHellfire", component: pick(M5, "GhostRiderHellfire") },
+  { name: "GodzillaAtomicTitan", component: pick(M6, "GodzillaAtomicTitan") },
+  { name: "GokuSaiyanAscend", component: pick(M7, "GokuSaiyanAscend") },
+  { name: "HaalandCyborgViking", component: pick(M8, "HaalandCyborgViking") },
+  { name: "IronManMark85HUD", component: pick(M9, "IronManMark85HUD") },
+  { name: "KaneEliteImpact", component: pick(M10, "KaneEliteImpact") },
+  { name: "KratosSpartanVengeance", component: pick(M11, "KratosSpartanVengeance") },
+  { name: "MbappeSupersonicAura", component: pick(M12, "MbappeSupersonicAura") },
+  { name: "SaitamaSeriousPunch", component: pick(M13, "SaitamaSeriousPunch") },
+  { name: "ThomasShelbyPeakyAura", component: pick(M14, "ThomasShelbyPeakyAura") },
+  { name: "WolverineClawSlash", component: pick(M15, "WolverineClawSlash") },
+  { name: "ZlatanLionRage", component: pick(M16, "ZlatanLionRage") },
+  { name: "ZoroKingOfHell", component: pick(M17, "ZoroKingOfHell") },
 ];
