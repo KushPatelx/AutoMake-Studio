@@ -1,14 +1,12 @@
-﻿# Node modules
+# Dependencies and build output
 node_modules/
 dist/
 build/
 .npm
-
-# Remotion & Output folders (Yeh important hai)
 out/
 .remotion/
 
-# Log files
+# Logs
 *.log
 npm-debug.log*
 
@@ -16,12 +14,16 @@ npm-debug.log*
 .env
 .env.local
 
-# OS Files
+# OS and editor
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
 
-# User Generated Media
+# Generated and user data (the app writes here at runtime)
 projects/
 renders/
+clips/
+public/assets/edit/
+public/assets/facts/
+public/final_render.mp4
